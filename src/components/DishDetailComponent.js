@@ -5,23 +5,31 @@ import {Card , CardImg  , CardBody ,CardTitle ,CardText} from 'reactstrap';
 
 class DishDetailComponent extends Component{
 
-    constructor(props){
 
-        super(props);
+    componentDidMount(){
+
+        console.log('DishDetailComponent ComponentDidMount method invoked')
+
+    }
+
+    componentDidUpdate(){
+
+        console.log('DishDetailComponent componentDidUpdate method invoked')
 
     }
 
     render(){
 
-        const dish = this.props.dish;
+        console.log('DishDetailComponent render method invoked')
 
-        console.log(dish)
+
+        const dish = this.props.dish;
 
         if(dish !== null && dish !== undefined){
 
             const dishComments = dish.comments.map((comment)=>{
                 return (
-                    <div className = 'col-12'>
+                    <div  key={comment.id} className = 'col-12'>
                         <p>{comment.comment}</p>
                         <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                         <br/>
