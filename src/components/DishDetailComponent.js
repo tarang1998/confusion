@@ -6,53 +6,60 @@ import {Card , CardImg  , CardBody ,CardTitle ,CardText} from 'reactstrap';
 class DishDetailComponent extends Component{
 
     constructor(props){
+
         super(props);
+
     }
 
     render(){
 
         const dish = this.props.dish;
 
-        if(dish!==null){
+        console.log(dish)
+
+        if(dish !== null && dish !== undefined){
 
             const dishComments = dish.comments.map((comment)=>{
                 return (
                     <div className = 'col-12'>
                         <p>{comment.comment}</p>
-                        <p>-- {comment.author}  {comment.date}</p>
+                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US',{year:'numeric', month:'short', day:'2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                         <br/>
                     </div>
                 );
             });
 
             return(
-                <div className='row'>
+                <div className='container'>
+                    <div className='row'>
 
-                    <div className='col-12 col-md-5 m-2'>
+                        <div className='col-12 col-md-5 m-2'>
 
-                        <Card>
-                            
-                            <CardImg width='100%' src={dish.image} alt={dish.name} />
+                            <Card>
+                                
+                                <CardImg width='100%' src={dish.image} alt={dish.name} />
 
-                            <CardBody >
+                                <CardBody >
 
-                                <CardTitle >{dish.name}</CardTitle>
+                                    <CardTitle >{dish.name}</CardTitle>
 
-                                <CardText>{dish.description}</CardText>
+                                    <CardText>{dish.description}</CardText>
 
-                            </CardBody>
+                                </CardBody>
 
-                        </Card>
+                            </Card>
+
+                        </div>
+
+                        <div className='col-12 col-md-5 m-2'>
+
+                            <h1>Comments</h1>
+
+                            {dishComments}
+
+                        </div>
 
                     </div>
-
-                    <div className='col-12 col-md-5 m-2'>
-
-                        <h1>Comments</h1>
-                        {dishComments}
-
-                    </div>
-
                 </div>
             );
         }
