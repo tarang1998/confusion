@@ -1,65 +1,60 @@
-import React , {Component} from 'react';
+import React  from 'react';
 import {Card , CardImg , CardImgOverlay ,CardTitle} from 'reactstrap';
 
-class Menu extends Component{
 
-    constructor(props){
+function RenderDishItems({dish,onClick}){
 
-        super(props);
+    return(
+        <Card onClick={()=>onClick(dish.id)}>
+                        
+            <CardImg width='100%' src={dish.image} alt={dish.name} />
 
-        console.log('Menu Components constructor method invoked')
+            <CardImgOverlay >
 
-    }
+                <CardTitle >{dish.name}</CardTitle>
 
-    componentDidMount(){
+            </CardImgOverlay>
 
-        console.log('Menu Components ComponentDidMount method invoked')
+        </Card>
 
-    }
+    );
+}
 
     
 
+const Menu = (props)=>{
 
-    render(){
+    const menu = props.dishes.map((dish) => {
 
-        const menu = this.props.dishes.map((dish) => {
+        return(
+            <div key={dish.id} className = 'col-12 col-md-5 m-2'>
+                
+                <RenderDishItems dish={dish} onClick={props.onClick}/>
+               
+            </div>  
+        ) 
+    });
 
-            return(
-                <div key={dish.id} className = 'col-12 col-md-5 m-2'>
-                    
-                    <Card onClick={()=>this.props.onClick(dish.id)}>
-                        
-                        <CardImg width='100%' src={dish.image} alt={dish.name} />
-
-                        <CardImgOverlay >
-
-                            <CardTitle >{dish.name}</CardTitle>
-
-                        </CardImgOverlay>
-
-                    </Card>
-
-                </div>  
-            ) 
-        });
-
-        console.log('Menu Components render method invoked')
+    console.log('Menu Components render method invoked')
 
 
-        return (
+    return (
 
-            <div className = 'container'>
-                <div className = 'row'>
+        <div className = 'container'>
 
-                        {menu}
+            <div className = 'row'>
 
-                </div>
+                    {menu}
 
             </div>
 
-        );
+        </div>
 
-    }
+    );
 }
+
+
+
+       
 
 export default Menu;

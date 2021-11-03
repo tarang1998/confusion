@@ -17,6 +17,21 @@ class MainComponent extends Component{
       dishes : DISHES,
       selectedDishId : null
     }
+
+    console.log('Main Components constructor method invoked')
+
+  }
+
+  componentDidMount(){
+
+      console.log('Main Components ComponentDidMount method invoked')
+
+  }
+
+  componentDidUpdate(){
+
+    console.log('Main Components componentDidUpdate method invoked')
+
   }
 
   onDishSelect(dishId){
@@ -28,6 +43,9 @@ class MainComponent extends Component{
     }
 
   render(){
+
+    console.log('Main Components render method invoked')
+
     return (
       <div>
 
@@ -43,6 +61,7 @@ class MainComponent extends Component{
 
       </div>
     );
+
   }
 }
 
