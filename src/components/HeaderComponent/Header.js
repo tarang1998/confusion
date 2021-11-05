@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Jumbotron } from "reactstrap";
 import { Navbar, NavbarBrand } from 'reactstrap';
 
+import './Header.css';
 
 
 class Header extends Component{
@@ -10,7 +11,7 @@ class Header extends Component{
         return(
             <>
 
-                <Navbar dark color="primary">
+                <Navbar dark >
                     <div className="container">
                         <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
                     </div>

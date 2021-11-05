@@ -3,8 +3,8 @@ import { Component } from 'react/cjs/react.production.min';
 import Menu from './MenuComponent';
 import {DISHES} from '../shared/dishes'
 import DishDetailComponent from './DishDetailComponent';
-import Header  from './Header';
-import Footer from './Footer';
+import Footer from './FooterComponent/Footer';
+import Header from './HeaderComponent/Header';
 
 
 class MainComponent extends Component{
