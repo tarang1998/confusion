@@ -1,0 +1,20 @@
+.footer {
+  background-color: #d1c4e9;
+  margin: 0px auto;
+  margin-top: 40px;
+  padding: 20px 0px 20px 0px;
+}
+
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: #0f0f0f;
+}
+
+.btn-social-icon {
+  margin: 5px;
+}
+
+.copyright {
+  margin-top: 20px !important;
+}
