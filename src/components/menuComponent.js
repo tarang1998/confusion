@@ -7,7 +7,7 @@ import { Card, CardImg, CardImgOverlay,
 
     function RenderDish({dish, onClick}){
         return(
-                <Card key={dish.id} onClick={() => onClick(dish.id)} className = 'mt-5'>
+                <Card key={dish.id} onClick={() => onClick(dish.id)} className = 'mt-3 mb-3'>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
                         <CardImgOverlay>
                             <CardTitle>{dish.name}</CardTitle>
