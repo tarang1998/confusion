@@ -1,14 +1,15 @@
 
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle } from 'reactstrap';
+    CardTitle  ,  Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
 
 
 function RenderDish({dishDetail}){
 
     return(
-        <div  className="col-12 col-md-5 m-1 mt-5">
+        <div  className="col-12 col-md-5 m-1 mt-5 mb-5" >
     <Card>
         <CardImg top src={dishDetail.image} alt={dishDetail.name} />
         <CardBody>
@@ -26,9 +27,9 @@ function RenderComments({comments}){
 
     const displayComments = comments.map((comment)=>{
         return(
-            <div key={comment.id} className = 'm-1 mt-5'>
-                <p>{comment.comment}</p>
-                -- {comment.author} | {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
+            <div key={comment.id} className = 'm-1 mb-4 '>
+                <p> -- {comment.comment}</p>
+                @ {comment.author} | {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
             </div>  
         ) 
 
@@ -47,19 +48,31 @@ function RenderComments({comments}){
 
 const DishDetailComponent = (props) => {
 
-    if (props.dishDetails != null) {
+    // if (props.dish != null) {
 
-        const dishDetail = props.dishDetails;
 
         
 
         return(
             <div className="container">
+
+                <div className="row mt-5">
+                    <Breadcrumb>
+
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>                
+                </div>
+
                 <div className="row">
                    
-                   <RenderDish dishDetail = {dishDetail}/>
+                   <RenderDish dishDetail = {props.dish}/>
 
-                   <RenderComments comments = {dishDetail.comments}/>
+                   <RenderComments comments = {props.comments}/>
 
                    
                 </div>
@@ -67,14 +80,14 @@ const DishDetailComponent = (props) => {
             
             
         );
-    }
+    // }
 
-    else
-        return(
-            <div>
+    // else
+    //     return(
+    //         <div>
 
-            </div>
-        );
+    //         </div>
+    //     );
 
 }
 

@@ -12,7 +12,7 @@ import Header from './header';
 import Menu from './menuComponent';
 import Home from './home'
 
-import {Routes, Route, Navigate } from 'react-router-dom';
+import {Routes, Route, Navigate ,useParams} from 'react-router-dom';
 import Contact from './contactComponent';
 
 
@@ -32,21 +32,33 @@ class Main extends Component{
 
   }
 
-  onDishSelect(dishId) {
-    this.setState({ selectedDishId: dishId});
+  // onDishSelect(dishId) {
+  //   this.setState({ selectedDishId: dishId});
     
-    }   
+  //   }   
 
 
   render(){
 
 
-    const HomePage = () => {
+    // const HomePage = () => {
+    //   return(
+    //       <Home 
+    //       />
+    //   );
+    // }
+
+    const DishWithId = () => {
+
+      let {dishId}=useParams()
+
+
       return(
-          <Home 
-          />
+          <DishDetailComponent dish={this.state.dishes.filter((dish) => dish.id === parseInt(dishId,10))[0]} 
+            comments={this.state.comments.filter((comment) => comment.dishId === parseInt(dishId,10))} />
       );
-    }
+    };
+    
 
     return (
       <div>
@@ -63,7 +75,11 @@ class Main extends Component{
               promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
               leader={this.state.leaders.filter((leader) => leader.featured)[0]}/>} />
 
-              <Route  path='/menu' element={<Menu dishes={this.state.dishes} />} />
+              <Route  exact path='/menu' element={<Menu dishes={this.state.dishes} />} />
+
+              <Route  path='/menu/:dishId'   
+              element = {<DishWithId/>}
+              />
 
               <Route  path='/contactus' element={<Contact/>} />
 
