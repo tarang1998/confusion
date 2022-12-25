@@ -37,7 +37,7 @@ import { Card, CardImg, CardImgOverlay,
 
         const menu = props.dishes.map((dish)=>{
             return(
-                <div key={dish.id} className = 'col-12 col-md-5 m-1'>
+                <div key={dish.id} className = 'col-12 col-md-3 m-1'>
                     <RenderDish dish = {dish} onClick = {props.onClick}/>
                 </div>  
             ) 
