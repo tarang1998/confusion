@@ -14,6 +14,7 @@ import Home from './home'
 
 import {Routes, Route, Navigate ,useParams} from 'react-router-dom';
 import Contact from './contactComponent';
+import About from './aboutUsComponent';
 
 
 
@@ -82,6 +83,9 @@ class Main extends Component{
               />
 
               <Route  path='/contactus' element={<Contact/>} />
+
+              <Route  path='/aboutus' element={<About leaders = {this.state.leaders}
+              />} />
 
 
               <Route path="*" element={<Navigate to="/home" replace />} />
