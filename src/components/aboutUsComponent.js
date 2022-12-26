@@ -4,6 +4,8 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 
 import { Link } from 'react-router-dom';
 
+import telephoneCheck from '../utils/telephoneValidator';
+import validateEmail from '../utils/emailValidation';
 
 
 
@@ -41,6 +43,15 @@ function About(props) {
         );
     });
 
+
+    const required = (val) => val && val.length;
+    const maxLength = (len) => (val) => !(val) || (val.length <= len);
+    const minLength = (len) => (val) => val && (val.length >= len);
+    const isNumber = (val) => telephoneCheck(val);
+    const validEmail = (val) => validateEmail(val);
+
+
+    
 
 
     return(
@@ -124,7 +135,20 @@ function About(props) {
                                     <Control.text model=".firstname" id="firstname" name="firstname"
                                         placeholder="First Name"
                                         className="form-control"
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                        }}
                                          />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".firstname"
+                                        show="touched"
+                                        messages={{
+                                            required: ' *Required* ',
+                                            minLength: ' *Value must be greater than 2 characters* ',
+                                            maxLength: ' *Value must be 15 characters or less* '
+                                        }}
+                                     />
                                 </Col>
                             </Row>
 
@@ -134,7 +158,20 @@ function About(props) {
                                     <Control.text model=".lastname" id="lastname" name="lastname"
                                         placeholder="Last Name"
                                         className="form-control"
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                        }}
                                          />
+                                     <Errors
+                                        className="text-danger"
+                                        model=".lastname"
+                                        show="touched"
+                                        messages={{
+                                            required: ' *Required* ',
+                                            minLength: ' *Value must be greater than 2 characters* ',
+                                            maxLength: ' *Value must be 15 characters or less* '
+                                        }}
+                                     />
                                 </Col>
                             </Row>
 
@@ -144,7 +181,22 @@ function About(props) {
                                     <Control.text model=".telnum" id="telnum" name="telnum"
                                         placeholder="Tel. Number"
                                         className="form-control"
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(15), isNumber
+                                        }}
                                          />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".telnum"
+                                        show="touched"
+                                        messages={{
+                                            required: ' *Required* ',
+                                            minLength: ' *Value must be greater than 2 characters* ',
+                                            maxLength: ' *Value must be 15 characters or less* ',
+                                            isNumber: ' *Value must be a number* '
+                                        }}
+                                     />
+                                   
                                 </Col>
                             </Row>
 
@@ -153,7 +205,20 @@ function About(props) {
                                 <Col md={10}>
                                     <Control.text model=".email" id="email" name="email"
                                         placeholder="Email"
+                                        validators={{
+                                            required, validEmail
+                                        }}
                                         className="form-control" />
+
+                                    <Errors
+                                        className="text-danger"
+                                        model=".email"
+                                        show="touched"
+                                        messages={{
+                                            required: ' *Required* ',
+                                            validEmail: ' *Invalid Email Address* '
+                                        }}
+                                     />
                                 </Col>
                             </Row>
 
