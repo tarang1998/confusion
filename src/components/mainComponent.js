@@ -16,12 +16,28 @@ import {Routes, Route, Navigate ,useParams} from 'react-router-dom';
 import Contact from './contactComponent';
 import About from './aboutUsComponent';
 
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = state => {
+  return {
+    dishes: state.dishes,
+    comments: state.comments,
+    promotions: state.promotions,
+    leaders: state.leaders
+  }
+}
+
+
+
 
 
 class Main extends Component{
 
+
   constructor(props){
     super(props)
+
 
   
     this.state = {
@@ -55,8 +71,8 @@ class Main extends Component{
 
 
       return(
-          <DishDetailComponent dish={this.state.dishes.filter((dish) => dish.id === parseInt(dishId,10))[0]} 
-            comments={this.state.comments.filter((comment) => comment.dishId === parseInt(dishId,10))} />
+          <DishDetailComponent dish={this.props.dishes.filter((dish) => dish.id === parseInt(dishId,10))[0]} 
+            comments={this.props.comments.filter((comment) => comment.dishId === parseInt(dishId,10))} />
       );
     };
     
@@ -72,11 +88,11 @@ class Main extends Component{
 
           <Routes>
 
-              <Route path='/home' element={<Home  dish={this.state.dishes.filter((dish) => dish.featured)[0]}
-              promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
-              leader={this.state.leaders.filter((leader) => leader.featured)[0]}/>} />
+              <Route path='/home' element={<Home  dish={this.props.dishes.filter((dish) => dish.featured)[0]}
+              promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
+              leader={this.props.leaders.filter((leader) => leader.featured)[0]}/>} />
 
-              <Route  exact path='/menu' element={<Menu dishes={this.state.dishes} />} />
+              <Route  exact path='/menu' element={<Menu dishes={this.props.dishes} />} />
 
               <Route  path='/menu/:dishId'   
               element = {<DishWithId/>}
@@ -84,7 +100,7 @@ class Main extends Component{
 
               <Route  path='/contactus' element={<Contact/>} />
 
-              <Route  path='/aboutus' element={<About leaders = {this.state.leaders}
+              <Route  path='/aboutus' element={<About leaders = {this.props.leaders}
               />} />
 
 
@@ -101,4 +117,4 @@ class Main extends Component{
 }
 
 
-export default Main;
+export default (connect(mapStateToProps)(Main));
